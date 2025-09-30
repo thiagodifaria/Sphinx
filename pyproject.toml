@@ -1,13 +1,13 @@
 # pyproject.toml
 
 [tool.poetry]
-name = "sphinx-platform"
-version = "0.1.0"
+name = "Sphinx"
+version = "v1.0.0"
 description = "Autonomous cloud engineering platform within the terminal."
-authors = ["Your Name <you@example.com>"]
+authors = ["Thiago Di Faria <thiagodifaria@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "sphinx", from = "src"}]
+packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -16,16 +16,22 @@ dependency-injector = "^4.41.0"
 textual = "^0.56.0"
 google-generativeai = "^0.5.2"
 pydantic = "^2.7.0"
-prometheus-api-client = "^0.6.1"
+prometheus-api-client = "^0.6.0"
 python-dotenv = "^1.0.1"
 pydantic-settings = "^2.2.1"
 aiosqlite = "^0.20.0"
+pyyaml = "^6.0.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
 ruff = "^0.3.4"
 mypy = "^1.9.0"
 textual-dev = "^1.5.0"
+pytest-asyncio = "^0.23.6"
+pytest-httpx = "^0.28.0"
+
+[tool.poetry.scripts]
+sphinx = "app.__main__:bootstrap"
 
 [build-system]
 requires = ["poetry-core"]
@@ -33,16 +39,17 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 88
-src = ["src", "tests"]
+src = ["app", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "N"]
 
 [tool.mypy]
 strict = true
-python_path = "src"
+python_path = "app"
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["app"]
 testpaths = ["tests"]
+asyncio_mode = "auto"

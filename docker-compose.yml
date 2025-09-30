@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - .:/workspaces/sphinx:cached
+    command: sleep infinity
+    networks:
+      - sphinx-net
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: sphinx-prometheus-compose
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    networks:
+      - sphinx-net
+
+networks:
+  sphinx-net: {}
