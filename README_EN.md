@@ -313,18 +313,6 @@ poetry run mypy app/
 ### Action History
 ![History](./images/history.png)
 
-## 📄 Development Flow
-
-1. Clone the repository
-2. Create a feature branch (`git checkout -b feature/feature-name`)
-3. Implement changes following Clean Architecture principles
-4. Add corresponding tests with pytest
-5. Run linting (`poetry run ruff check app/`)
-6. Run type checking (`poetry run mypy app/`)
-7. Commit changes (`git commit -m 'feat: add new feature'`)
-8. Push to branch (`git push origin feature/feature-name`)
-9. Open a Pull Request
-
 ## 🚢 Deploy
 
 ### Standalone Executable

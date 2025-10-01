@@ -315,16 +315,6 @@ poetry run mypy app/
 
 ## 📄 Fluxo de Desenvolvimento
 
-1. Clone o repositório
-2. Crie uma branch para sua feature (`git checkout -b feature/nome-da-feature`)
-3. Implemente mudanças seguindo princípios de Clean Architecture
-4. Adicione testes correspondentes com pytest
-5. Execute linting (`poetry run ruff check app/`)
-6. Execute verificação de tipos (`poetry run mypy app/`)
-7. Faça commit das mudanças (`git commit -m 'feat: adiciona nova funcionalidade'`)
-8. Envie para a branch (`git push origin feature/nome-da-feature`)
-9. Abra um Pull Request
-
 ## 🚢 Deploy
 
 ### Executável Standalone
