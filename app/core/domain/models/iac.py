@@ -1,5 +1,3 @@
-# src/sphinx/core/domain/models/iac.py
-
 from __future__ import annotations
 from typing import Literal
 
@@ -33,7 +31,6 @@ class TerraformConfiguration(BaseModel):
     backend_config: TerraformBackendConfig | None = None
 
 
-# Modelos existentes que não foram alterados
 ResourceChangeAction = Literal["create", "update", "delete", "no-op", "replace"]
 
 class ResourceChange(BaseModel):

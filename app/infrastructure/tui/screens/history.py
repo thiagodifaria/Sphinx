@@ -1,5 +1,3 @@
-# src/sphinx/infrastructure/tui/screens/history_screen.py
-
 from __future__ import annotations
 
 from dependency_injector.wiring import Provide, inject
@@ -12,13 +10,14 @@ from app.infrastructure.di.containers import Container
 
 
 class HistoryScreen(Static):
-    """Um widget que representa o conteúdo da aba de Histórico."""
+    """Um ecrã que exibe o histórico de ações de otimização aplicadas."""
 
     @inject
     def __init__(
         self,
         view_history_uc: ViewHistoryUseCase = Provide[Container.view_history_uc],
-        *args, **kwargs
+        *args,
+        **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.view_history_uc = view_history_uc
@@ -27,21 +26,21 @@ class HistoryScreen(Static):
         yield DataTable(id="history-table", cursor_type="row", zebra_stripes=True)
 
     async def on_mount(self) -> None:
-        """Quando a tela é montada, busca os dados do histórico e popula a tabela."""
+        """Busca os dados do histórico e popula a tabela quando o ecrã é montado."""
         table = self.query_one(DataTable)
-        table.border_title = "Historico de Acoes Aplicadas" # Define o título no Python
+        table.border_title = "Histórico de Ações Aplicadas"
         table.add_columns("Data/Hora (UTC)", "Recurso", "Ação Realizada")
         await self.update_history()
 
     async def update_history(self) -> None:
-        """Busca e exibe os registros de histórico."""
+        """Busca e exibe os registos de histórico mais recentes na tabela."""
         table = self.query_one(DataTable)
         table.clear()
-        
+
         history_records = await self.view_history_uc.execute()
 
         if not history_records:
-            table.add_row(Text("Nenhuma ação registrada ainda.", style="dim"))
+            table.add_row(Text("Nenhuma ação registada ainda.", style="dim"))
             return
 
         for record in history_records:

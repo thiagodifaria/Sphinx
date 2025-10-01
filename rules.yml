@@ -1,5 +1,3 @@
-# rules.yml
-
 rules:
   - name: "Idle CPU Detection"
     metric_name: "rate(process_cpu_seconds_total[1m])"
@@ -10,8 +8,7 @@ rules:
     opportunity_title_template: "CPU Ociosa Detectada para '{resource_id}'"
     opportunity_description_template: "O uso da CPU para o recurso '{resource_id}' permaneceu abaixo de {threshold}% por mais de {duration_minutes} minutos. Considere otimizar a alocação de recursos."
 
-  # Esta regra serve apenas para garantir que a métrica 'aws_ebs_volume_info'
-  # seja coletada para que nosso plugin de otimização de EBS possa usá-la.
+  # Esta regra serve apenas para garantir que a métrica 'aws_ebs_volume_info' seja coletada para que nosso plugin de otimização de EBS possa usá-la.
   # A condição de threshold > 999 garante que ela nunca seja acionada por si só.
   - name: "Metric Collector for EBS Plugin"
     metric_name: "aws_ebs_volume_info"

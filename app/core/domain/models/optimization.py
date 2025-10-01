@@ -1,5 +1,3 @@
-# src/sphinx/core/domain/models/optimization.py
-
 from __future__ import annotations
 
 from uuid import UUID, uuid4
@@ -13,8 +11,6 @@ from app.core.domain.models.observability import Metric
 class SuggestedChange(BaseModel):
     """Representa uma solução de código proposta para uma oportunidade."""
     impact_assessment: str = Field(..., description="Análise do impacto esperado da mudança.")
-    # Mudança: A sugestão agora é um arquivo IaC completo, não apenas um diff.
-    # Isso torna a sugestão autocontida e diretamente aplicável.
     suggested_iac_file: IaCFile = Field(..., description="O arquivo IaC completo com a solução proposta.")
 
 

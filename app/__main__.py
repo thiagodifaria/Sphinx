@@ -1,5 +1,3 @@
-# src/sphinx/__main__.py
-
 import asyncio
 import logging
 
@@ -10,46 +8,43 @@ logger = logging.getLogger(__name__)
 
 
 async def initialize_dependencies(container: Container) -> None:
-    """Função assíncrona para inicializar dependências que requerem I/O."""
-    logger.info("Inicializando dependências...")
-    
-    # Adicionado "import asyncio" para a função sleep no provedor mockado
-    # Isso é necessário para que a injeção de dependência funcione corretamente
-    container.wire(modules=[__name__])
-    
+    """Inicializa dependências assíncronas, como conexões a bases de dados."""
+    logger.info("A inicializar dependências...")
+
     history_repo = container.history_repository()
     await history_repo.initialize()
-    
+
     workspace_repo = container.workspace_repository()
     await workspace_repo.initialize()
 
     plugin_manager = container.plugin_manager()
     plugin_manager.discover_and_load()
 
-    logger.info("Dependências inicializadas.")
-    
+    logger.info("Dependências inicializadas com sucesso.")
+
 
 def bootstrap() -> None:
-    """Inicializa e configura a aplicação antes da execução."""
+    """Configura o contentor de DI, inicializa e executa a aplicação."""
     container = Container()
-    
     container.config.from_dict({"mock_data": "true"})
-    
+
+    # Liga o contentor aos módulos que necessitam de injeção de dependência.
     container.wire(
         modules=[
-            "sphinx.infrastructure.cli",
-            "sphinx.infrastructure.tui.screens.chat_screen",
-            "sphinx.infrastructure.tui.screens.dashboard_screen",
-            "sphinx.infrastructure.tui.screens.history_screen",
-            "sphinx.infrastructure.tui.screens.workspace_screen",
+            "app.infrastructure.cli",
+            "app.infrastructure.tui.screens.chat",
+            "app.infrastructure.tui.screens.dashboard",
+            "app.infrastructure.tui.screens.history",
+            "app.infrastructure.tui.screens.workspace",
             __name__,
         ]
     )
-    
+
     try:
-        # A injeção de dependência agora é tratada de forma síncrona pelo bootstrap
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
+        loop = asyncio.get_event_loop()
+        if loop.is_closed():
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
         loop.run_until_complete(initialize_dependencies(container))
     except Exception as e:
         logging.basicConfig(level=logging.ERROR)

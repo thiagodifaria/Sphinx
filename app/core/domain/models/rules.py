@@ -1,5 +1,3 @@
-# src/sphinx/core/domain/models/rules.py
-
 from __future__ import annotations
 from enum import Enum
 

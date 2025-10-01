@@ -1,5 +1,3 @@
-# src/sphinx/infrastructure/config/settings.py
-
 from __future__ import annotations
 
 from pydantic import Field, SecretStr

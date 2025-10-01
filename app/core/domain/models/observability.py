@@ -1,5 +1,3 @@
-# src/sphinx/core/domain/models/observability.py
-
 from __future__ import annotations
 from datetime import datetime
 

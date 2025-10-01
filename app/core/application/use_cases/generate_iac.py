@@ -1,18 +1,12 @@
-# src/sphinx/core/application/use_cases/generate_iac.py
-
 from __future__ import annotations
 
-from app.core.application.ports.gateways.llm import LLMServicePort
+from app.core.application.ports.gateways import LLMServicePort
 from app.core.domain.models.iac import IaCFile
 
 
 class GenerateIacUseCase:
     """
-    Orquestra a geração de um arquivo IaC a partir de um prompt do usuário.
-
-    Este caso de uso encapsula o fluxo de negócio, dependendo de abstrações (portas)
-    para interagir com sistemas externos. Ele não conhece detalhes de implementação
-    do LLM, apenas o contrato definido pela LLMServicePort.
+    Orquestra a geração de um arquivo IaC a partir de um prompt do utilizador.
     """
 
     def __init__(self, llm_service: LLMServicePort) -> None:
@@ -23,12 +17,10 @@ class GenerateIacUseCase:
         Executa o caso de uso de geração de IaC.
 
         Args:
-            prompt: O prompt de entrada fornecido pelo usuário.
+            prompt: O prompt de entrada fornecido pelo utilizador.
 
         Returns:
             O arquivo IaC gerado pelo serviço de LLM.
         """
-        # Futuramente, este método pode incluir lógica adicional, como validação
-        # do prompt, enriquecimento com contexto ou tratamento de erros de negócio.
         iac_file = await self._llm_service.generate_iac(prompt)
         return iac_file

@@ -1,8 +1,6 @@
-# src/sphinx/core/application/use_cases/manage_workspaces.py
-
 from __future__ import annotations
 
-from app.core.application.ports.gateways.workspace import WorkspaceRepositoryPort
+from app.core.application.ports.gateways import WorkspaceRepositoryPort
 from app.core.application.state import AppState
 from app.core.domain.models.iac import TerraformBackendConfig
 from app.core.domain.models.workspace import Workspace

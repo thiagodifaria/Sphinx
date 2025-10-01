@@ -1,5 +1,3 @@
-# src/sphinx/core/plugins/manager.py
-
 from __future__ import annotations
 import importlib.util
 import inspect
@@ -42,7 +40,7 @@ class PluginManager:
                 module = importlib.util.module_from_spec(spec)
                 spec.loader.exec_module(module)
 
-                # Inspeciona o módulo em busca de classes que implementam nossas interfaces.
+                # Inspeciona o módulo em busca de classes nas interfaces.
                 for _, cls in inspect.getmembers(module, inspect.isclass):
                     if issubclass(cls, SphinxPlugin) and cls is not SphinxPlugin and not inspect.isabstract(cls):
                         self._register_plugin(cls())

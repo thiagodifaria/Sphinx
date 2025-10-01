@@ -1,5 +1,3 @@
-# src/sphinx/adapters/gateways/db_sqlite.py
-
 from __future__ import annotations
 from datetime import datetime
 from uuid import UUID
@@ -7,22 +5,26 @@ import json
 
 import aiosqlite
 
-from app.core.application.ports.gateways.history import HistoryRepositoryPort
-from app.core.application.ports.gateways.workspace import WorkspaceRepositoryPort
+from app.core.application.ports.gateways import (
+    HistoryRepositoryPort,
+    WorkspaceRepositoryPort,
+)
 from app.core.domain.models.history import ActionRecord
 from app.core.domain.models.iac import TerraformBackendConfig
 from app.core.domain.models.workspace import Workspace
 
 
 class SQLiteHistoryRepository(HistoryRepositoryPort):
-    """Implementação da HistoryRepositoryPort que utiliza um banco de dados SQLite."""
+    """Implementa a persistência do histórico de ações usando uma base de dados SQLite."""
+
     def __init__(self, db_path: str):
         self._db_path = db_path
 
     async def initialize(self) -> None:
         """Cria a tabela de histórico se ela não existir."""
         async with aiosqlite.connect(self._db_path) as db:
-            await db.execute("""
+            await db.execute(
+                """
                 CREATE TABLE IF NOT EXISTS action_history (
                     opportunity_id TEXT PRIMARY KEY,
                     applied_at TEXT NOT NULL,
@@ -30,11 +32,12 @@ class SQLiteHistoryRepository(HistoryRepositoryPort):
                     opportunity_title TEXT NOT NULL,
                     applied_iac_content TEXT NOT NULL
                 )
-            """)
+            """
+            )
             await db.commit()
 
     async def add_record(self, record: ActionRecord) -> None:
-        """Insere um novo ActionRecord no banco de dados."""
+        """Insere um novo ActionRecord na base de dados."""
         async with aiosqlite.connect(self._db_path) as db:
             await db.execute(
                 """
@@ -54,14 +57,14 @@ class SQLiteHistoryRepository(HistoryRepositoryPort):
             await db.commit()
 
     async def get_all_records(self) -> list[ActionRecord]:
-        """Busca e retorna todos os registros do banco de dados."""
+        """Busca e retorna todos os registros da base de dados."""
         async with aiosqlite.connect(self._db_path) as db:
             db.row_factory = aiosqlite.Row
             cursor = await db.execute(
                 "SELECT * FROM action_history ORDER BY applied_at DESC"
             )
             rows = await cursor.fetchall()
-            
+
             return [
                 ActionRecord(
                     opportunity_id=UUID(row["opportunity_id"]),
@@ -75,20 +78,23 @@ class SQLiteHistoryRepository(HistoryRepositoryPort):
 
 
 class SQLiteWorkspaceRepository(WorkspaceRepositoryPort):
-    """Implementação da WorkspaceRepositoryPort que utiliza SQLite."""
+    """Implementa a persistência de workspaces usando uma base de dados SQLite."""
+
     def __init__(self, db_path: str):
         self._db_path = db_path
 
     async def initialize(self) -> None:
         """Cria a tabela de workspaces se ela não existir."""
         async with aiosqlite.connect(self._db_path) as db:
-            await db.execute("""
+            await db.execute(
+                """
                 CREATE TABLE IF NOT EXISTS workspaces (
                     id TEXT PRIMARY KEY,
                     name TEXT NOT NULL UNIQUE,
                     backend_config_json TEXT NOT NULL
                 )
-            """)
+            """
+            )
             await db.commit()
 
     async def add(self, workspace: Workspace) -> None:
@@ -111,7 +117,9 @@ class SQLiteWorkspaceRepository(WorkspaceRepositoryPort):
                 Workspace(
                     id=UUID(row["id"]),
                     name=row["name"],
-                    backend_config=TerraformBackendConfig(**json.loads(row["backend_config_json"]))
+                    backend_config=TerraformBackendConfig(
+                        **json.loads(row["backend_config_json"])
+                    ),
                 )
                 for row in rows
             ]

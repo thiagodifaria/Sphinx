@@ -1,5 +1,3 @@
-# plugins/example_memory_rule.py
-
 from __future__ import annotations
 
 from app.core.domain.models.observability import Metric
@@ -28,7 +26,6 @@ class HighMemoryUsageRule(AnalysisRulePlugin):
         opportunities: list[OptimizationOpportunity] = []
         memory_metrics = [m for m in metrics if "process_virtual_memory_bytes" in m.name]
 
-        # Limiar de 100MB para este exemplo.
         HIGH_MEMORY_THRESHOLD_BYTES = 100 * 1024 * 1024
 
         for metric in memory_metrics:

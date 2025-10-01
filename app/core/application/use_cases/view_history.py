@@ -1,8 +1,6 @@
-# src/sphinx/core/application/use_cases/view_history.py
-
 from __future__ import annotations
 
-from app.core.application.ports.gateways.history import HistoryRepositoryPort
+from app.core.application.ports.gateways import HistoryRepositoryPort
 from app.core.domain.models.history import ActionRecord
 
 

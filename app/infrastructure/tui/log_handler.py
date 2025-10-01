@@ -1,5 +1,3 @@
-# src/sphinx/infrastructure/tui/log_handler.py
-
 from __future__ import annotations
 import logging
 
@@ -9,15 +7,15 @@ from textual.message import Message
 
 class TuiLogHandler(logging.Handler):
     """
-    Um handler de logging que envia registros como mensagens para a TUI do Textual.
+    Um gestor de logging que envia registos como mensagens para a TUI.
 
-    Isso desacopla a lógica de logging do código da aplicação da UI. Qualquer
-    módulo pode simplesmente usar o logger padrão do Python, e este handler
-    interceptará as mensagens e as encaminhará para a TUI de forma assíncrona.
+    Isto permite que qualquer módulo use o logger padrão do Python para enviar
+    mensagens para a interface do utilizador de forma assíncrona.
     """
 
     class NewLog(Message):
-        """Mensagem customizada do Textual para transportar um registro de log."""
+        """Mensagem para transportar um registo de log para a UI."""
+
         def __init__(self, record: str) -> None:
             self.record = record
             super().__init__()
@@ -27,7 +25,10 @@ class TuiLogHandler(logging.Handler):
         self.app = app
 
     def emit(self, record: logging.LogRecord) -> None:
-        """Chamado pelo sistema de logging para cada novo registro."""
+        """
+        Chamado pelo sistema de logging para cada novo registo.
+
+        Formata o registo e posta-o como uma mensagem thread-safe para a app Textual.
+        """
         log_message = self.format(record)
-        # post_message é thread-safe e pode ser chamado de qualquer lugar.
         self.app.post_message(self.NewLog(log_message))

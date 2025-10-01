@@ -1,161 +1,214 @@
-/* src/sphinx/infrastructure/tui/app.css */
+/*  Variáveis Globais (Design Tokens)  */
 
-/* --- Layout Principal da Aplicação --- */
-#app-container {
-    layout: vertical;
+    /* Cores */
+    $background: #0d1117;
+    $surface: #161b22;   
+    $primary: #58a6ff;   
+    $success: #3fb950;   
+
+    /* Texto */
+    $text: #c9d1d9;
+    $text-muted: #8b949e;
+    $text-inverse: #ffffff;
+
+    /* Bordas */
+    $border-color: #30363d;
+    $border-color-highlight: $primary;
+
+    /* Espaçamento */
+    $spacing-1: 1;
+    $spacing-2: 2;
+
+/*  Estilos de Base e Layout  */
+
+Screen {
+    background: $background;
+    color: $text;
 }
+
 #app-container > TabbedContent {
     height: 1fr;
 }
+
 #app-container > LogViewer {
     height: 8;
-    border-top: heavy white;
+    border-top: heavy $border-color-highlight;
+    background: $surface;
 }
 
-/* --- Layout Geral da Aba de Chat --- */
-ChatScreen {
-    layout: vertical;
-    padding: 1;
-    overflow: hidden;
-}
+/* Painel de conteúdo genérico usado em vários ecrãs */
 .content-panel {
     height: 1fr;
-    margin-bottom: 1;
-    border: round #666;
-}
-#generated-code-view {
-    padding: 0 1;
+    background: $surface;
+    border: round $border-color;
+    padding: $spacing-1;
+    margin-bottom: $spacing-1;
 }
 
-/* --- Feedback de Carregamento (Spinner) --- */
-#loading-indicator {
+/* Feedback de Carregamento (Spinner) */
+#loading-indicator, #dashboard-loading-indicator {
     display: none;
     height: 1fr;
     content-align: center middle;
+}
+
+
+/*  Estilos Globais de Widgets  */
+
+Button {
+    min-width: 16;
+}
+
+Button.-success {
+    background: $success;
+    color: $text-inverse;
+}
+
+Input {
+    width: 100%;
+    margin-top: $spacing-1;
+    border-bottom: tall $border-color-highlight;
+}
+
+Input:focus {
+    border-bottom: tall $primary;
+}
+
+DataTable > .datatable--cursor {
+    background: $primary;
+    color: $text-inverse;
+}
+
+.label {
+    color: $text-muted;
+    margin-top: $spacing-1;
+}
+
+.separator {
+    height: 1;
+    width: 100%;
+    background: $border-color;
+    margin: $spacing-1 0;
+}
+
+
+/*  Ecrã de Chat  */
+
+ChatScreen {
+    layout: vertical;
+    padding: $spacing-1;
+    overflow: hidden;
+}
+
+ChatScreen.loading .content-panel {
+    display: none;
 }
 ChatScreen.loading #loading-indicator {
     display: block;
 }
-ChatScreen.loading .content-panel {
-    display: none;
+
+#generated-code-view {
+    padding: 0 $spacing-1;
 }
 
-/* --- Contêiner e Estilo dos Botões (Chat) --- */
 #button-container {
     height: auto;
     width: 100%;
     align-horizontal: right;
-    padding-right: 1;
-}
-#button-container Button {
-    margin-left: 2;
-    min-width: 16;
-}
-Input {
-    width: 100%;
-    margin-top: 1;
+    padding-right: $spacing-1;
 }
 
-/* --- Estilos da Aba de Dashboard --- */
+#button-container Button {
+    margin-left: $spacing-2;
+}
+
+
+/*  Ecrã do Dashboard  */
+
 DashboardScreen {
     layout: horizontal;
-    padding: 1;
+    padding: $spacing-1;
 }
+
 #dashboard-content-container {
     display: block;
 }
-#dashboard-loading-indicator {
+
+DashboardScreen.loading #dashboard-content-container {
     display: none;
-    height: 1fr;
-    content-align: center middle;
 }
+DashboardScreen.loading #dashboard-loading-indicator {
+    display: block;
+}
+
 #left-column {
     width: 40%;
     height: 100%;
-    margin-right: 1;
+    margin-right: $spacing-1;
 }
+
 #opportunities-panel {
-    height: 60%; 
+    height: 60%;
     width: 100%;
-    margin-right: 0;
-    margin-bottom: 1;
-    border: round #666;
+    margin-bottom: $spacing-1;
+    background: $surface;
+    border: round $border-color;
 }
+
+#metric-chart-panel {
+    height: 1fr;
+    width: 100%;
+    padding: $spacing-1;
+    background: $surface;
+    border: round $border-color;
+}
+
 #solution-viewer {
     width: 60%;
     height: 100%;
-    border: round #666;
+    background: $surface;
+    border: round $border-color;
 }
+
 #solution-scroll-container.hidden {
     display: none;
 }
 #solution-scroll-container {
-    padding: 0 1;
+    padding: $spacing-1;
 }
 #solution-scroll-container > Static {
     height: auto;
-    color: $text;
 }
-.label {
-    color: $text-muted;
-    margin-top: 1;
-}
+
 #apply-solution-button {
     width: 100%;
-    margin-top: 2;
-}
-DataTable > .datatable--cursor {
-    background: $surface-darken-2;
-    color: $text;
-}
-.separator {
-    height: 1;
-    width: 100%;
-    background: $panel-lighten-2;
-    margin: 1 0;
+    margin-top: $spacing-2;
 }
 
-/* --- Painel de Gráfico (Dashboard) --- */
-#metric-chart-panel {
-    height: 1fr;
-    width: 100%;
-    padding: 1;
-    border: round #666;
-}
-#metric-chart-container {
-    height: 100%;
-    content-align: center middle;
-}
-#metric-title {
-    width: 100%;
-    text-align: center;
-}
-#sparkline {
-    width: 100%;
-    text-align: center;
+
+/*  Ecrãs de Histórico e Workspaces  */
+
+HistoryScreen, WorkspaceScreen {
+    padding: $spacing-1;
 }
 
-/* --- Estilos das Abas de Histórico e Workspaces --- */
-HistoryScreen {
-    padding: 1;
-}
 #history-table {
-    border: round #666;
+    background: $surface;
+    border: round $border-color;
     height: 100%;
 }
 
-WorkspaceScreen {
-    padding: 1;
-}
 #ws-container {
     height: 100%;
     width: 100%;
 }
+
 #ws-list-container {
     width: 65%;
     height: 100%;
-    padding-right: 1;
-    border: round #666;
+    padding-right: $spacing-1;
+    background: $surface;
+    border: round $border-color;
 }
 #ws-list-container #ws-table {
     height: 100%;
@@ -164,10 +217,11 @@ WorkspaceScreen {
 #ws-create-container {
     width: 35%;
     height: 100%;
-    padding: 0 1;
-    margin-left: 1;
-    border: round #666;
+    padding: 0 $spacing-1;
+    margin-left: $spacing-1;
+    background: $surface;
+    border: round $border-color;
 }
 #ws-create-container Input {
-    margin-bottom: 1;
+    margin-bottom: $spacing-1;
 }

@@ -1,5 +1,3 @@
-# plugins/aws_ebs_optimizer.py
-
 from __future__ import annotations
 import logging
 
@@ -32,7 +30,6 @@ class EbsGp2ToGp3RulePlugin(AnalysisRulePlugin):
         """
         opportunities: list[OptimizationOpportunity] = []
         
-        # Filtra as métricas que contêm as informações do tipo de volume.
         volume_info_metrics = [m for m in metrics if m.name == "aws_ebs_volume_info"]
         logger.info(f"Plugin '{self.name}' encontrou {len(volume_info_metrics)} métrica(s) de volume EBS para analisar.")
 
@@ -43,7 +40,6 @@ class EbsGp2ToGp3RulePlugin(AnalysisRulePlugin):
             if not volume_id:
                 continue
 
-            # A lógica principal do plugin: se o volume é gp2, cria uma oportunidade.
             if volume_type == "gp2":
                 logger.info(f"Plugin '{self.name}' detectou volume gp2: {volume_id}")
                 opportunities.append(

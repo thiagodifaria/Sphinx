@@ -1,5 +1,3 @@
-# src/sphinx/infrastructure/tui/app.py
-
 from __future__ import annotations
 import logging
 
@@ -8,16 +6,17 @@ from textual.containers import Vertical
 from textual.widgets import TabbedContent, TabPane, Footer, Header
 
 from app.infrastructure.tui.log_handler import TuiLogHandler
-from app.infrastructure.tui.screens.chat_screen import ChatScreen
-from app.infrastructure.tui.screens.dashboard_screen import DashboardScreen
-from app.infrastructure.tui.screens.history_screen import HistoryScreen
-from app.infrastructure.tui.screens.workspace_screen import WorkspaceScreen
-from app.infrastructure.tui.widgets.log_viewer import LogViewer
+from app.infrastructure.tui.screens.chat import ChatScreen
+from app.infrastructure.tui.screens.dashboard import DashboardScreen
+from app.infrastructure.tui.screens.history import HistoryScreen
+from app.infrastructure.tui.screens.workspace import WorkspaceScreen
+from app.infrastructure.tui.widgets.log import LogViewer
 
 
 class SphinxApp(App):
     """A aplicação TUI principal do Sphinx."""
-    CSS_PATH = ["app.css"]
+
+    CSS_PATH = ["assets/style.css"]
     BINDINGS = [
         ("ctrl+t", "toggle_tabs", "Abas"),
         ("ctrl+q", "quit", "Sair"),
@@ -40,12 +39,8 @@ class SphinxApp(App):
             yield LogViewer(classes="box")
         yield Footer()
 
-    def action_toggle_tabs(self) -> None:
-        """Ação para focar no conteúdo das abas."""
-        self.query_one("#main-tabs").focus()
-
     def on_mount(self) -> None:
-        """Configura o handler de logging customizado ao iniciar a aplicação."""
+        """Configura o gestor de logging da TUI ao iniciar a aplicação."""
         handler = TuiLogHandler(self)
         logging.basicConfig(
             level=logging.INFO,
@@ -53,3 +48,7 @@ class SphinxApp(App):
             force=True,
         )
         logging.info("Sphinx TUI iniciada e pronta.")
+
+    def action_toggle_tabs(self) -> None:
+        """Ação para focar no conteúdo das abas."""
+        self.query_one("#main-tabs").focus()

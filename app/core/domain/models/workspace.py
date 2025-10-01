@@ -1,5 +1,3 @@
-# src/sphinx/core/domain/models/workspace.py
-
 from __future__ import annotations
 from uuid import UUID, uuid4
 
