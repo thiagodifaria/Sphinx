@@ -250,22 +250,6 @@ RULES_FILE_PATH=custom-rules.yml sphinx
 - Rolagem automática com alternância de bloqueio de rolagem
 - Persistente em todas as abas
 
-## 🧪 Testes
-
-```bash
-# Executar todos os testes
-poetry run pytest
-
-# Executar com relatório de cobertura
-poetry run pytest --cov=app tests/
-
-# Executar arquivo de teste específico
-poetry run pytest tests/test_use_cases.py
-
-# Executar verificação de tipos mypy
-poetry run mypy app/
-```
-
 ## 🔌 Criando Plugins Customizados
 
 1. Crie um novo arquivo Python no diretório `plugins/`:
@@ -312,8 +296,6 @@ poetry run mypy app/
 
 ### Histórico de Ações
 ![Histórico](./images/history.png)
-
-## 📄 Fluxo de Desenvolvimento
 
 ## 🚢 Deploy
 

@@ -250,22 +250,6 @@ RULES_FILE_PATH=custom-rules.yml sphinx
 - Automatic scrolling with scroll lock toggle
 - Persistent throughout all tabs
 
-## 🧪 Tests
-
-```bash
-# Run all tests
-poetry run pytest
-
-# Run with coverage report
-poetry run pytest --cov=app tests/
-
-# Run specific test file
-poetry run pytest tests/test_use_cases.py
-
-# Run mypy type checking
-poetry run mypy app/
-```
-
 ## 🔌 Creating Custom Plugins
 
 1. Create a new Python file in the `plugins/` directory:
