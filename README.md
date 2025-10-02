@@ -51,7 +51,7 @@ Sphinx is a **cutting-edge autonomous cloud engineering platform** built entirel
 ### Option 1: Download Executable (Recommended)
 ```bash
 # Download the pre-compiled version - no setup required!
-curl -L https://github.com/thiagodifaria/Sphinx/releases/download/v1.0.0/sphinx -o sphinx
+curl -L https://github.com/thiagodifaria/Sphinx/releases/download/Sphinx/sphinx.exe -o sphinx
 chmod +x sphinx
 ./sphinx
 ```

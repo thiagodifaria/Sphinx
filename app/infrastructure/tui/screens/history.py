@@ -2,15 +2,16 @@ from __future__ import annotations
 
 from dependency_injector.wiring import Provide, inject
 from textual.app import ComposeResult
-from textual.widgets import DataTable, Static
+from textual.containers import Vertical
+from textual.widgets import DataTable
 from rich.text import Text
 
 from app.core.application.use_cases.view_history import ViewHistoryUseCase
 from app.infrastructure.di.containers import Container
 
 
-class HistoryScreen(Static):
-    """Um ecrã que exibe o histórico de ações de otimização aplicadas."""
+class HistoryScreen(Vertical):
+    """Um Tela que exibe o histórico de ações de otimização aplicadas."""
 
     @inject
     def __init__(
@@ -26,7 +27,7 @@ class HistoryScreen(Static):
         yield DataTable(id="history-table", cursor_type="row", zebra_stripes=True)
 
     async def on_mount(self) -> None:
-        """Busca os dados do histórico e popula a tabela quando o ecrã é montado."""
+        """Busca os dados do histórico e popula a tabela quando o Tela é montado."""
         table = self.query_one(DataTable)
         table.border_title = "Histórico de Ações Aplicadas"
         table.add_columns("Data/Hora (UTC)", "Recurso", "Ação Realizada")

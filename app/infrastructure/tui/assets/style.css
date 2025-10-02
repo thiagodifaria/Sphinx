@@ -36,7 +36,7 @@ Screen {
     background: $surface;
 }
 
-/* Painel de conteúdo genérico usado em vários ecrãs */
+/* Painel de conteúdo genérico usado em vários Telas */
 .content-panel {
     height: 1fr;
     background: $surface;
@@ -92,7 +92,7 @@ DataTable > .datatable--cursor {
 }
 
 
-/*  Ecrã de Chat  */
+/*  Tela de Chat  */
 
 ChatScreen {
     layout: vertical;
@@ -123,7 +123,7 @@ ChatScreen.loading #loading-indicator {
 }
 
 
-/*  Ecrã do Dashboard  */
+/*  Tela do Dashboard  */
 
 DashboardScreen {
     layout: horizontal;
@@ -163,6 +163,18 @@ DashboardScreen.loading #dashboard-loading-indicator {
     border: round $border-color;
 }
 
+#metric-chart-panel Static {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#metric_plot_static {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
 #solution-viewer {
     width: 60%;
     height: 100%;
@@ -186,7 +198,7 @@ DashboardScreen.loading #dashboard-loading-indicator {
 }
 
 
-/*  Ecrãs de Histórico e Workspaces  */
+/*  Telas de Histórico e Workspaces  */
 
 HistoryScreen, WorkspaceScreen {
     padding: $spacing-1;

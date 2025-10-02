@@ -3,7 +3,7 @@ from __future__ import annotations
 from dependency_injector.wiring import Provide, inject
 from textual.app import ComposeResult
 from textual.containers import Vertical, Horizontal
-from textual.widgets import Button, DataTable, Input, Static
+from textual.widgets import Button, DataTable, Input
 from rich.text import Text
 
 from app.core.application.state import AppState
@@ -16,8 +16,8 @@ from app.core.domain.models.workspace import Workspace
 from app.infrastructure.di.containers import Container
 
 
-class WorkspaceScreen(Static):
-    """Um ecrã para gerir e selecionar Workspaces de trabalho."""
+class WorkspaceScreen(Vertical):
+    """Um Tela para gerir e selecionar Workspaces de trabalho."""
 
     @inject
     def __init__(

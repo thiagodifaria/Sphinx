@@ -4,7 +4,7 @@ Sphinx é uma plataforma de engenharia de nuvem autônoma interativa e de últim
 
 ## 🚀 Executável Disponível
 
-📦 **Download Direto**: Executável pré-compilado disponível na seção [Releases](https://github.com/thiagodifaria/Sphinx/releases/download/v1.0.0/sphinx) - Sem necessidade de instalação do Python!
+📦 **Download Direto**: Executável pré-compilado disponível na seção [Releases](https://github.com/thiagodifaria/Sphinx/releases/download/Sphinx/sphinx.exe) - Sem necessidade de instalação do Python!
 
 ## 🎯 Funcionalidades
 
@@ -286,16 +286,16 @@ RULES_FILE_PATH=custom-rules.yml sphinx
 ## 📷 Screenshots
 
 ### Dashboard - Oportunidades de Otimização
-![Dashboard](./images/dashboard.png)
+![Dashboard](mages/dashboard.png)
 
 ### Chat - Geração de IaC Orientada por IA
-![Chat de Geração](./images/chat.png)
+![Chat de Geração](images/chat.png)
 
-### Visualização de Métricas
-![Gráfico de Métricas](./images/metrics.png)
+### Visualização do Workspace
+![Workspace](images/workspace.png)
 
 ### Histórico de Ações
-![Histórico](./images/history.png)
+![Histórico](images/history.png)
 
 ## 🚢 Deploy
 

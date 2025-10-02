@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 
 class DashboardScreen(Static):
-    """Um ecrã que representa o conteúdo da aba de Dashboard."""
+    """Uma tela que representa o conteúdo da aba de Dashboard."""
 
     opportunities: list[OptimizationOpportunity] = []
     selected_opportunity: OptimizationOpportunity | None = None
