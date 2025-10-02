@@ -286,7 +286,7 @@ RULES_FILE_PATH=custom-rules.yml sphinx
 ## 📷 Screenshots
 
 ### Dashboard - Oportunidades de Otimização
-![Dashboard](mages/dashboard.png)
+![Dashboard](images/dashboard.png)
 
 ### Chat - Geração de IaC Orientada por IA
 ![Chat de Geração](images/chat.png)
